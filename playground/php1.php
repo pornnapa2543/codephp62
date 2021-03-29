@@ -1,14 +1,6 @@
 <?php
-$dbhost =  'localhost' ;
-$dbuser =  'root' ;
-$dbpass =  '' ;
-$dbname =  'codephp62' ;
+require_once 'connectdb.php';
 
-$myconn = new  mysqli($dbhost, $dbuser, $dbpass, $dbname );
-if($myconn->connect_errno){
-     print("Connect failed: %s\n ,$myconn->connect_error ");
-     exit();
-}
  $strSQL = "SELECT `ID`, `usermane`, `passwoed_hash`, `status` FROM `user`";
  $result = $myconn->query ($strSQL);
 
