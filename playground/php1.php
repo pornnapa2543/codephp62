@@ -21,6 +21,8 @@ require_once 'connectdb.php';
             <td> ลำดับ</td>
             <td> ชื่อผู้ใช้</td>
             <td> สถานะ</td>
+            <td>เเก้ไข</td>
+            <td> ลบ</td>
         </tr>
         <?php
         while ($row = $result->fetch_array()) {
@@ -29,6 +31,8 @@ require_once 'connectdb.php';
                 <td><?php echo $row["ID"];?></td>
                 <td><?php echo $row["usermane"];?></td>
                 <td><?php echo $row["status"];?></td>
+                <td>edit</td>
+                <td><a href="delete.php?id=<?php echo $row["ID"];?>">delete</a></td>
             </td>
         <?php
         }
