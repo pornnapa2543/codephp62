@@ -1,14 +1,14 @@
 <?php
 require_once 'connectdb.php';
 $id="";
-$usermane="";
+$username="";
 $status="";
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     $id = "";
     if(isset($_GET["ID"]) && $_GET["ID"] !='') {
     $id = $_GET["ID"];
-    $usermane=$_GET["usermane"];
+    $username=$_GET["usermane"];
     $status= $_GET["status"];
     
     }else{
@@ -19,23 +19,29 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $frmUsername = $frmPassword = "";
+    $username =  $status= "";
+    $id = $_GET["ID"];
+    $username= $_POST["username"];
+    $status= $_POST["status"];
 
-    $frmUsername = $_POST["username"];
-    $frmPassword = $_POST["password"];
+    if ($username && $status){
+        $strSQL = "UPDATE user SET usermane='".$username ."',status=".$status." WHERE ID=".$id;
+        if (($username=="") && ($status == "")){
+        echo "ไม่สามารถเพิ่มข้อมูลได้1";
+        }else{
+        echo $strSQL;
+        $result = $myconn->query($strSQL);
 
-    if ($frmUsername && $frmPassword)
-        $strSQL =   "UPDATE `user` SET `c`=[value-1],`usermane`=[value-2],`passwoed_hash`=[value-3],`status`=[value-4] WHERE ID=" .$ID;
-
-    $result = $myconn->query($strSQL);
-    if ($result) {
-        echo "เพิ่มข้อมูลสำเร็จ";
-    } else {
-        echo "ไม่สามารถเพิ่มข้อมูลได้";
-    }
-}
-?>
-
+        if ($result){
+                 echo "เพิ่มข้อมูลสำเร็จ";
+        } else {
+                 echo "ไม่สามารถเพิ่มข้อมูลได้";
+        }
+        }
+        }
+   }
+    ?>
+    
 <!DOCTYPE html>
 <html lang="en">                                                                                                            
 
@@ -47,11 +53,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <form action="update.php" method="post">
+    <form action="update.php?ID=<?=$id?>" method="post">
         <table border="1">
             <tr>
                 <td>username</td>
-                <td><input type="text" name="username" value="<?=$usermane?>"></td>
+                <td><input type="text" name="username" value="<?=$username?>"></td>
             </tr>
             <tr>
                 <td>status</td>
@@ -63,5 +69,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </table>
     </form>
 </body>
-
 </html>
+
