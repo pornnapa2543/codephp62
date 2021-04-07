@@ -1,29 +1,24 @@
 <?php
+include 'template\header.html';
 require_once 'connectdb.php';
 
  $strSQL = "SELECT `ID`, `usermane`, `passwoed_hash`, `status` FROM `user`";
  $result = $myconn->query ($strSQL);
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-    <title>Document</title>
-</head>
 
 <body>
-    <table border="3" width="100%">
+    <table class="table table-striped table-dark">
+        <thead class="thead-dark">
         <tr>
-            <td> ลำดับ</td>
-            <td> ชื่อผู้ใช้</td>
-            <td> สถานะ</td>
-            <td>เเก้ไข</td>
-            <td> ลบ</td>        </tr>
+            <th> ลำดับ</th>
+            <th> ชื่อผู้ใช้</th>
+            <th> สถานะ</th>
+            <th>เเก้ไข</th>
+            <th> ลบ</th>      
+        </tr>
+        </thead>
+        <tbody>
         <?php
         while ($row = $result->fetch_array()) {
         ?>
@@ -38,6 +33,11 @@ require_once 'connectdb.php';
         <?php
         }
         ?>
-
+    </tbody>
     </table>
+    <a href="inserttt.php"> เพิ่มผู้ใช้ </a>
+
+    <?php
+    include 'template\header.html';
+    ?>
 </body>
